@@ -173,7 +173,209 @@
 - 数组的下标合法区间是[0,length-1]。
 填充:Arrays.fill(a， 2， 4, 100)。//将数组a中2到4的索引的元素替换为100 获取数组的长度:数组.length，如a.length，获取数组a的元素个数;a[0].length，表示获取二维数组中第一个数组的长度。 
 - 数组的遍历:可以使用for循环或者for嵌套循环(对于二维数组)，也可以使用增强for循环来对数组进行遍历，增强for循环格式:for(变量类型 变量名:被遍历的数组)
-
+## 常用类 API
+### String类的特点:
+- 字符串对象一旦被初始化就不会被改变。
+### String 类中的方法及使用
+1. 获取:
+- 获取字符串中字符的个数(长度). int length();
+- 根据位置获取字符。
+- char charAt(int index);
+- 根据字符获取在字符串中的第一次出现的位置. int indexOf(int ch)
+- int indexOf(int ch,int fromIndex):从指定位置进行ch的查找第一次出现位置 int indexOf(String str);
+- int indexOf(String str,int fromIndex);
+- 根据字符串获取在字符串中的第一次出现的位置. int lastIndexOf(int ch)
+- int lastIndexOf(int ch,int fromIndex):从指定位置进行ch的查找第一次出现位置 int lastIndexOf(String str);
+- int lastIndexOf(String str,int fromIndex); 获取字符串中一部分字符串。也叫子串.
+- String substring(int beginIndex, int endIndex)//包含begin 不包含end 。 String substring(int beginIndex);
+2. 转换。
+- 将字符串变成字符串数组(字符串的切割)
+ String[] split(String regex):涉及到正则表达式.
+- 将字符串变成字符数组。
+char[] toCharArray();
+- 将字符串变成字节数组。
+ byte[] getBytes();
+- 将字符串中的字母转成大小写。
+String toUpperCase():大写
+String toLowerCase():小写
+- 将字符串中的内容进行替换
+String replace(char oldch,char newch);
+String replace(String s1,String s2);
+- 将字符串两端的空格去除。
+String trim();
+- 将字符串进行连接 。
+String concat(string); 
+3. 判断
+- 两个字符串内容是否相同啊?
+boolean equals(Object obj);
+boolean equalsIgnoreCase(string str);忽略大写比较字符串内容。
+-  字符串中是否包含指定字符串?
+boolean contains(string str);
+-  字符串是否以指定字符串开头。是否以指定字符串结尾。
+boolean startsWith(string);
+boolean endsWith(string); *
+4. 比较。
+### StringBuffer用法及其使用
+- StringBuffer:就是字符串缓冲区。用于存储数据的容器。
+- 特点:
+1. 长度的可变的。
+2. 可以存储不同类型数据。
+3. 最终要转成字符串进行使用。 
+4. 可以对字符串进行修改。
+- 应该具备什么功能呢? 
+1. 添加:
+StringBuffer append(data);
+StringBuffer insert(index,data);
+2. 删除:
+StringBuffer delete(start,end):包含头，不包含尾。
+StringBuffer deleteCharAt(int index):删除指定位置的元素
+3. 查找:
+char charAt(index);
+int indexOf(string);
+int lastIndexOf(string);
+4. 修改:
+StringBuffer replace(start,end,string); void setCharAt(index,char);
+### StringBuffer 和 StringBuilder 区别
+- 不同的是: StringBuffer是线程同步的。通常用于多线程。StringBuilder是线程不同步的。通常用于单线程。 它的出现提高效率 
+## 集合框架（容器）
+### Set、List、Map大总结
+- 集合类的由来: 对象用于封装特有数据，对象多了需要存储，如果对象的个数不确定。 就使用集合容器进行存储。
+- 集合特点:
+1. 用于存储对象的容器。 2. 集合的长度是可变的。 3. 集合中不可以存储基本数据类型值。
+- 集合容器因为内部的数据结构不同，有多种具体容器。不断的向上抽取，就形成了集合框架。
+- 框架的顶层Collection接口:
+- Collection的常见方法:
+1. 添加。
+boolean add(Object obj):
+boolean addAll(Collection coll):
+2. 删除。
+boolean remove(object obj):
+boolean removeAll(Collection coll); void clear();
+3. 判断:
+boolean contains(object obj):
+boolean containsAll(Colllection coll); boolean isEmpty():判断集合中是否有元素。
+4. 获取:
+int size():
+Iterator iterator():取出元素的方式:迭代器。 该对象必须依赖于具体容器，因为每一个容器的数据结构都不同。 所以该迭代器对象是在容器中进行内部实现的。 对于使用容器者而言，具体的实现不重要，只要通过容器获取到该实现的迭代器的对象即可，也就是iterator方法。 Iterator接口就是对所有的Collection容器进行元素取出的公共接口。其实就是抓娃娃游戏机中的夹子!
+5. 其他:
+boolean retainAll(Collection coll);取交集。 Object[] toArray():将集合转成数组。
+- List:有序(存入和取出的顺序一致),元素都有索引(角标)，元素可以重复。 
+- Set:元素不能重复,无序。
+- List:特有的常见方法:有一个共性特点就是都可以操作角标。
+1. 添加
+void add(index,element); void add(index,collection);
+2. 删除;
+Object remove(index):
+3. 修改:
+Object set(index,element);
+4. 获取:
+Object get(index);
+int indexOf(object);
+int lastIndexOf(object); List subList(from,to);
+- list集合是可以完成对元素的增删改查。
+- List: 
+1. Vector:内部是数组数据结构，是同步的。增删，查询都很慢!
+2.ArrayList:内部是数组数据结构，是不同步的。替代了Vector。查询的速度快。 
+- LinkedList:内部是链表数据结构，是不同步的。增删元素的速度很快。
+- List: 1. Vector:内部是数组数据结构，是同步的。增删，查询都很慢!
+3. LinkedList:
+- List: 
+1. Vector:内部是数组数据结构，是同步的。增删，查询都很慢!
+   addFirst();
+   addLast():
+   offerFirst();
+   offetLast();
+   getFirst();.//获取但不移除，如果链表为空，抛出NoSuchElementException. getLast();
+   peekFirst();//获取但不移除，如果链表为空，返回null.
+   peekLast():
+   removeFirst();//获取并移除，如果链表为空，抛出NoSuchElementException. removeLast();
+   pollFirst();//获取并移除，如果链表为空，返回null.
+   pollLast();
+- Set:元素不可以重复，是无序。 Set接口中的方法和Collection一致。 |--HashSet: 内部数据结构是哈希表 ，是不同步的。
+- 如何保证该集合的元素唯一性呢? 是通过对象的hashCode和equals方法来完成对象唯一性的。 如果对象的hashCode值不同，那么不用判断equals方法，就直接存储到哈希表中。 如果对象的hashCode值相同，那么要再次判断对象的equals方法是否为true。 如果为true，视为相同元素，不存。如果为false，那么视为不同元素，就进行存储。
+- 记住:如果元素要存储到HashSet集合中，必须覆盖hashCode方法和equals方法。 一般情况下，如果定义的类会产生很多对象，比如人，学生，书，通常都需要覆盖equals，hashCode 方法。
+- 建立对象判断是否相同的依据。
+- TreeSet:可以对Set集合中的元素进行排序。是不同步的。 判断元素唯一性的方式:就是根据比较方法的返回结果是否是0，是0，就是相同元素，不存。
+- TreeSet对元素进行排序的方式一: 让元素自身具备比较功能，元就需要实现Comparable接口。覆盖compareTo方法。
+如果不要按照对象中具备的自然顺序进行排序。如果对象中不具备自然顺序。
+- 怎么办? 可以使用TreeSet集合第二种排序方式二:
+让集合自身具备比较功能，定义一个类实现Comparator接口，覆盖compare方法。 将该类对象作为参数传递给TreeSet集合的构造函数。
+if(this.hashCode()== obj.hashCode() && this.equals(obj))
+- 哈希表确定元素是否相同 
+1. 判断的是两个元素的哈希值是否相同。如果相同，在判断两个对象的内容是否相同。
+2. 判断哈希值相同，其实判断的是对象的hashCode的方法。判断内容相同，用的是equals方法。
+- 注意:如果哈希值不同，是不需要判断equals。
+### Map的使用
+- Map:一次添加一对元素。Collection 一次添加一个元素。 Map也称为双列集合，Collection集合称为单列集合。 其实map集合中存储的就是键值对。 map集合中必须保证键的唯一性。
+- 常用方法: 
+1. 添加。
+value put(key,value):返回前一个和key关联的值，如果没有返回null. 
+2. 删除。
+void clear():清空map集合。
+value remove(key):根据指定的key翻出这个键值对。
+3. 判断。
+boolean containsKey(key): boolean containsValue(value): boolean isEmpty();
+4. 获取。
+value get(key):通过键获取值，如果没有该键返回null。
+- 当然可以通过返回null，来判断是否包含指定键。 int size(): 获取键值对的个数。
+- Map常用的子类:
+1. Hashtable :内部结构是哈希表，是同步的。不允许null作为键，null作为值。
+2. Properties:用来存储键值对型的配置文件的信息，可以和IO技术相结合。
+- HashMap : 内部结构是哈希表，不是同步的。允许null作为键，null作为值。 
+- TreeMap : 内部结构是二叉树，不是同步的。可以对Map集合中的键进行排序。
+### 其他类 API 使用
+- Math:提供了操作数学运算的方法，都是静态的。
+- 常用的方法:
+- ceil():返回大于参数的最小整数。
+- floor():返回小于参数的最大整数。
+- round():返回四舍五入的整数。
+- pow(a,b):a的b次方。
+### IO 流
+- 字符流:
+FileReader；
+FileWriter；
+BufferedReader；
+BufferedWriter；
+- 字节流:
+InputStream； OutputStream。
+- 操作文件的字节流对象。
+FileOutputStream；
+FileInputStream；
+BufferedOutputStream；
+BufferedInputStream；
+- 字符流和字节流之间的转换动作。
+- 转换流:
+InputStreamReader isr = new InputStreamReader(new FileInputStream("a.txt")); InputStreamReader isr = new InputStreamReader(new FileInputStream("a.txt"),"gbk"); FileReader fr = new FileReader("a.txt");
+FileWriter fw = new FileWriter("b.txt");
+OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream("b.txt")); OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream("b.txt"),"gbk");
+### File类:
+- 用于将文件和文件夹封装成对象。
+1. 创建。
+boolean createNewFile():如果该文件不存在，会创建，如果已存在，则不创建。不会像输出流一样会覆盖。
+boolean mkdir();
+boolean mkdirs();
+2. 删除。
+boolean delete(); void deleteOnExit();
+3. 获取:
+String getAbsolutePath(); String getPath();
+String getParent();
+String getName();
+ long length();
+ long lastModified();
+4. 判断:
+boolean exists(); boolean isFile(); boolean isDirectory();
+- IO中的其他功能流对象:
+1. 打印流: PrintStream:字节打印流。
+- 特点:
+1. 构造函数接收File对象，字符串路径，字节输出流。意味着打印目的可以有很多。 
+2. 该对象具备特有的方法 打印方法 print println,可以打印任何类型的数据。 
+3. 特有的print方法可以保持任意类型数据表现形式的原样性，将数据输出到目的地。
+对于OutputStream父类中的write，是将数据的最低字节写出去。
+- PrintWriter:字符打印流。
+- 特点:
+1. 当操作的数据是字符时，可以选择PrintWriter，比PrintStream要方便。 
+2. 它的构造函数可以接收 File对象，字符串路径，字节输出流，字符输出流。
+3. 构造函数中，如果参数是输出流，那么可以通过指定另一个参数true完成自动刷新，该true对println方法有效。
 
 
 
