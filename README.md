@@ -320,16 +320,20 @@ int lastIndexOf(object); List subList(from,to);
  ```
 - Set:元素不可以重复，是无序。 Set接口中的方法和Collection一致。
 - HashSet: 内部数据结构是哈希表 ，是不同步的。
-- 如何保证该集合的元素唯一性呢? 是通过对象的hashCode和equals方法来完成对象唯一性的。 如果对象的hashCode值不同，那么不用判断equals方法，就直接存储到哈希表中。 如果对象的hashCode值相同，那么要再次判断对象的equals方法是否为true。 如果为true，视为相同元素，不存。如果为false，那么视为不同元素，就进行存储。
-- 记住:如果元素要存储到HashSet集合中，必须覆盖hashCode方法和equals方法。 一般情况下，如果定义的类会产生很多对象，比如人，学生，书，通常都需要覆盖equals，hashCode 方法。
-
+- 如何保证该集合的元素唯一性呢? 
+```
+是通过对象的hashCode和equals方法来完成对象唯一性的。 如果对象的hashCode值不同，那么不用判断equals方法，就直接存储到哈希表中。 如果对象的hashCode值相同，那么要再次判断对象的equals方法是否为true。 如果为true，视为相同元素，不存。如果为false，那么视为不同元素，就进行存储。
+记住:如果元素要存储到HashSet集合中，必须覆盖hashCode方法和equals方法。 一般情况下，如果定义的类会产生很多对象，比如人，学生，书，通常都需要覆盖equals，hashCode 方法。
+```
 - 建立对象判断是否相同的依据。
+```
 - TreeSet:可以对Set集合中的元素进行排序。是不同步的。 判断元素唯一性的方式:就是根据比较方法的返回结果是否是0，是0，就是相同元素，不存。
-- TreeSet对元素进行排序的方式一: 让元素自身具备比较功能，元就需要实现Comparable接口。覆盖compareTo方法。
+TreeSet对元素进行排序的方式一: 让元素自身具备比较功能，元就需要实现Comparable接口。覆盖compareTo方法。
 如果不要按照对象中具备的自然顺序进行排序。如果对象中不具备自然顺序。
-- 怎么办? 可以使用TreeSet集合第二种排序方式二:
+可以使用TreeSet集合第二种排序方式二:
 让集合自身具备比较功能，定义一个类实现Comparator接口，覆盖compare方法。 将该类对象作为参数传递给TreeSet集合的构造函数。
 if(this.hashCode()== obj.hashCode() && this.equals(obj))
+```
 - 哈希表确定元素是否相同 
 1. 判断的是两个元素的哈希值是否相同。如果相同，在判断两个对象的内容是否相同。
 2. 判断哈希值相同，其实判断的是对象的hashCode的方法。判断内容相同，用的是equals方法。
@@ -337,16 +341,20 @@ if(this.hashCode()== obj.hashCode() && this.equals(obj))
 ### Map的使用
 - Map:一次添加一对元素。Collection 一次添加一个元素。 Map也称为双列集合，Collection集合称为单列集合。 其实map集合中存储的就是键值对。 map集合中必须保证键的唯一性。
 - 常用方法: 
+```
 1. 添加。
 value put(key,value):返回前一个和key关联的值，如果没有返回null. 
 2. 删除。
 void clear():清空map集合。
 value remove(key):根据指定的key翻出这个键值对。
 3. 判断。
-boolean containsKey(key): boolean containsValue(value): boolean isEmpty();
+boolean containsKey(key): 
+boolean containsValue(value):
+boolean isEmpty();
 4. 获取。
 value get(key):通过键获取值，如果没有该键返回null。
-- 当然可以通过返回null，来判断是否包含指定键。 int size(): 获取键值对的个数。
+当然可以通过返回null，来判断是否包含指定键。 int size(): 获取键值对的个数。
+```
 - Map常用的子类:
 1. Hashtable :内部结构是哈希表，是同步的。不允许null作为键，null作为值。
 2. Properties:用来存储键值对型的配置文件的信息，可以和IO技术相结合。
@@ -360,19 +368,22 @@ value get(key):通过键获取值，如果没有该键返回null。
 - round():返回四舍五入的整数。
 - pow(a,b):a的b次方。
 ### IO 流
-- 字符流:
+```
+字符流:
 FileReader；
 FileWriter；
 BufferedReader；
 BufferedWriter；
-- 字节流:
+字节流:
 InputStream； OutputStream。
-- 操作文件的字节流对象。
+操作文件的字节流对象。
 FileOutputStream；
 FileInputStream；
 BufferedOutputStream；
 BufferedInputStream；
-- 字符流和字节流之间的转换动作。
+字符流和字节流之间的转换动作。
+```
+
 - 转换流:
 ```
 InputStreamReader isr = new InputStreamReader(new FileInputStream("a.txt"));
@@ -382,6 +393,7 @@ FileWriter fw = new FileWriter("b.txt");
 OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream("b.txt")); 
 OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream("b.txt"),"gbk");
 ```
+
 ### File类:
 - 用于将文件和文件夹封装成对象。
 ```
